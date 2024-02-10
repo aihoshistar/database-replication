@@ -39,8 +39,8 @@ services:
   
 # Names our volume
 volumes:
-  db-master:
-  db-slave: 
+  db-master: {}
+  db-slave: {}
 
 networks:
   appnet:
