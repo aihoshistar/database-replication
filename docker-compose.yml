@@ -3,7 +3,7 @@ version: "3.8"
 services:
   db-master:
     build: 
-      context: .
+      context: ./
       dockerfile: master/Dockerfile
     restart: always
     deploy:
@@ -21,7 +21,7 @@ services:
   
   db-slave:
     build: 
-      context: .
+      context: ./
       dockerfile: slave/Dockerfile
     restart: always
     deploy:
@@ -45,3 +45,4 @@ volumes:
 networks:
   appnet:
     driver: overlay
+
