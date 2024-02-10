@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   db-master:
-    image: db-mysql
+    image: mysql:8.3
     build: 
       context: ./
       dockerfile: master/Dockerfile
@@ -21,7 +21,7 @@ services:
       - appnet
   
   db-slave:
-    image: db-mysql 
+    image: mysql:8.3 
     build: 
       context: ./
       dockerfile: slave/Dockerfile
