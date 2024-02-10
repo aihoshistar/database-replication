@@ -7,18 +7,18 @@ services:
       context: .
       dockerfile: master/Dockerfile
     restart: always
+    deploy:
+      replicas: 1
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    ports:
-      - '3306:3306'
     volumes:
       - db-master:/var/lib/mysql
       - db-master:/var/lib/mysql-files
     networks:
-      - net-mysql
+      - appnet
   
   db-slave:
     container_name: mysql_slave
@@ -26,24 +26,24 @@ services:
       context: .
       dockerfile: slave/Dockerfile
     restart: always
+    deploy:
+      replicas: 1
     environment:
       MYSQL_DATABASE: 'db'
       MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
-    ports:
-      - '3307:3306'
     volumes:
       - db-slave:/var/lib/mysql
       - db-slave:/var/lib/mysql-files
     networks:
-      - net-mysql
+      - appnet
   
 # Names our volume
 volumes:
   db-master:
   db-slave: 
 
-networks: 
-  net-mysql:
-    driver: bridge
+networks:
+  appnet:
+    driver: overlay
